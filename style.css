@@ -1,0 +1,101 @@
+/* Base styles for all screen sizes */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar-brand i {
+    margin-right: 8px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.btn-dark {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+}
+
+footer a {
+    color: #222222;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+
+    .card-title {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .card-text {
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        max-width: 720px;
+    }
+
+    .card-title {
+        font-size: 1.75rem;
+    }
+
+    .card-text {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+    }
+
+    footer a {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .card-title {
+        font-size: 1.25rem;
+    }
+
+    .card-text {
+        font-size: 0.875rem;
+    }
+}
