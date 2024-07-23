@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* Add styles from Blog.css and dc.css here */
+        /* This is a placeholder. You should replace this with the actual content of your CSS files */
+        .container { max-width: 1200px; margin: 0 auto; }
+        .card { border: 1px solid #ddd; margin: 10px; padding: 10px; }
+        .pagination { display: flex; justify-content: center; margin-top: 20px; }
+        .page-number { margin: 0 5px; cursor: pointer; }
+        .active { font-weight: bold; }
+        /* Add more styles as needed */
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"%3E%3Cpath stroke="rgba(0,0,0,0.5)" stroke-width="2" d="M5 7h20M5 15h20M5 23h20" /%3E%3C/svg%3E');
+}
+
+/* App Container */
+.app {
+    padding: 20px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.breadcrumb .separator {
+    margin: 0 5px;
+}
+
+/* Search Filters */
+.search-filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+.search-box button {
+    border: none;
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    margin-left: -1px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-box button:hover {
+    background: #0056b3;
+}
+
+.filter select {
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+/* Card Grid */
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-date {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+.card-title {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.card-description {
+    color: #495057;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-number {
+    margin: 0 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.page-number.active {
+    font-weight: bold;
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+}
+
+.pagination button {
+    border: none;
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Footer */
+.footer {
+    background: #f8f9fa;
+    padding: 20px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.link-column {
+    margin-right: 20px;
+}
+
+.link-column h3 {
+    margin-bottom: 10px;
+}
+
+.social-and-download {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icon {
+    font-size: 1.2em;
+}
+
+.google-play-badge {
+    background: #34b7f1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.footer-bottom .copyright {
+    font-size: 0.9em;
+}
+
+.footer-bottom .legal-links {
+    display: flex;
+    gap: 10px;
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+/* Media Queries for Mobile View */
+
+/* Navbar */
+@media (max-width: 767.98px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 0;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath stroke="rgba(0,0,0,0.5)" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /%3E%3C/svg%3E');
+    }
+
+    .navbar-toggler {
+        border: none;
+    }
+}
+
+/* Card Grid */
+@media (max-width: 991.98px) {
+    .result-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 767.98px) {
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        margin: 10px 0;
+    }
+}
+
+/* Search Filters */
+@media (max-width: 767.98px) {
+    .search-filters {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-box, .filter {
+        width: 100%;
+    }
+
+    .search-box button {
+        width: 100%;
+    }
+
+    .filter select {
+        width: 100%;
+    }
+}
+
+/* Footer */
+@media (max-width: 767.98px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .link-column {
+        margin-bottom: 15px;
+    }
+
+    .social-and-download {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .google-play-badge {
+        margin-top: 10px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-bottom .legal-links {
+        margin-top: 10px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fa-solid fa-wheat-awn"></i> Agri Fusion</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="library.html">Library</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Crops
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search Disease</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="app">
+       
+        <div class="content">
+            <div class="breadcrumb">
+                <span>Blog</span>
+                <span class="separator">›</span>
+                <span class="active">All Articles</span>
+            </div>
+
+            <div class="search-filters">
+                <div class="search-box">
+                    <input type="text" placeholder="Search">
+                    <button class="search">🔍</button>
+                </div>
+                <div class="filter">
+                    <select>
+                        <option>Filter by tags</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <select>
+                        <option>Filter by category</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- C component content -->
+        <div class="container">
+            <h2><span id="totalItems"></span> results found</h2>
+            
+            <div id="resultGrid" class="result-grid">
+                <!-- Cards will be dynamically inserted here -->
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="logo-section">
+                    <h2>Plantix</h2>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h3>For farmers</h3>
+                        <a href="#">Agri Fusion app</a>
+                        <a href="#">Find products</a>
+                    </div>
+                    <div class="link-column">
+                        <h3>For agri-retailers</h3>
+                        <a href="#">Agri Fusion Partner app</a>
+                        <a href="#">Create online shop</a>
+                    </div>
+                    <div class="link-column">
+                        <h3>For businesses</h3>
+                        <a href="#">Agri Fusion Vision API</a>
+                        <a href="#">Agri Fusion Groundtruthing</a>
+                    </div>
+                    <div class="link-column">
+                        <h3>Company</h3>
+                        <a href="#">Job offers</a>
+                        <a href="#">Press and media</a>
+                    </div>
+                </div>
+                
+                <div class="social-and-download">
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-square-x-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                    <div class="google-play-badge">
+                        Get it on Google Play
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">© 2024 Agri Fusion</div>
+                <div class="legal-links">
+                    <a href="#">Imprint</a>
+                    <a href="#">Privacy notice</a>
+                    <a href="#">Terms of use</a>
+                    <a href="#">Manage cookies</a>
+                </div>
+                <div class="language-selector">
+                    <span>🌐</span>
+                    <select>
+                        <option value="en">En</option>
+                    </select>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const totalItems = 97;
+        const itemsPerPage = 8;
+        let currentPage = 1;
+        let results = [];
+
+        function generateRandomDate() {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const month = months[Math.floor(Math.random() * 12)];
+            const day = Math.floor(Math.random() * 28) + 1;
+            const year = 2023;
+            return `${day} ${month} ${year}`;
+        }
+
+        function generateRandomData() {
+            for (let i = 0; i < totalItems; i++) {
+                results.push({
+                    id: i,
+                    date: generateRandomDate(),
+                    title: `Random Title ${Math.floor(Math.random() * 1000)}`,
+                    description: 'This is a random description for the card. It can contain various details about the item.'
+                });
+            }
+        }
+
+        function createCard(item) {
+            return `
+                <div class="card">
+                    <img src="https://picsum.photos/300/200?random=${Math.random()}" alt="Random">
+                    <div class="card-content">
+                        <div class="card-date">${item.date}</div>
+                        <h3 class="card-title">${item.title}</h3>
+                        <p class="card-description">${item.description}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCards() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentItems = results.slice(startIndex, endIndex);
+
+            const resultGrid = document.getElementById('resultGrid');
+            resultGrid.innerHTML = currentItems.map(createCard).join('');
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            let paginationHTML = `
+                <button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&lt;</button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHTML += `
+                    <span class="page-number ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</span>
+                `;
+            }
+
+            paginationHTML += `
+                <button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>&gt;</button>
+            `;
+
+            document.getElementById('pagination').innerHTML = paginationHTML;
+        }
+
+        function changePage(newPage) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderCards();
+                renderPagination();
+            }
+        }
+
+        function init() {
+            generateRandomData();
+            document.getElementById('totalItems').textContent = totalItems;
+            renderCards();
+            renderPagination();
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
